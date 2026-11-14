@@ -4,6 +4,9 @@
 # they are called here directly, with the inputs ci.yml passes. No secrets: macOS builds are unsigned.
 name: QSO Graph platform builds
 on:
+  # A push to this branch runs it: workflow_dispatch needs the file on the default branch.
+  push:
+    branches: [qso-graph-builds]
   workflow_dispatch:
 permissions:
   contents: read
