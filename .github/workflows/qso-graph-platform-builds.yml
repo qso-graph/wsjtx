@@ -1,0 +1,23 @@
+# QSO Graph test builds of this branch, on the qso-graph/wsjtx fork only. This file is NOT part of the
+# proposed change (that is branch jtty-udp-text). The project's ci.yml cannot run on a fork: its prepare
+# job reads the WSJTX organization's private CI-image registry. The platform builds it calls do not, so
+# they are called here directly, with the inputs ci.yml passes. No secrets: macOS builds are unsigned.
+name: QSO Graph platform builds
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows:
+    uses: ./.github/workflows/build-windows.yml
+    with:
+      version: "3.3.0"
+      hamlib_branch: "4.7.2"
+  macos:
+    uses: ./.github/workflows/build-macos.yml
+    with:
+      version: "3.3.0"
+      hamlib_branch: "4.7.2"
+      arch: "arm64"
+      runner: "macos-15"
+      deployment_target: "11.0"
